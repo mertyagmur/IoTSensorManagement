@@ -1,0 +1,20 @@
+﻿[
+  {
+    "DeviceId": "Light_001",
+    "Type": "Light",
+    "ReadingInterval": "00:15:00",
+    "ReportingInterval": "01:00:10"
+  },
+  {
+    "DeviceId": "Temp_001",
+    "Type": "Temperature",
+    "ReadingInterval": "00:00:02",
+    "ReportingInterval": "00:00:10"
+  },
+  {
+    "DeviceId": "Hum_001",
+    "Type": "Humidity",
+    "ReadingInterval": "00:00:30",
+    "ReportingInterval": "00:01:00"
+  }
+]
