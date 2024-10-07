@@ -7,9 +7,10 @@
 4. [Getting Started](#getting-started)
 5. [Configuration](#configuration)
 6. [Adding New Sensors](#adding-new-sensors)
-7. [API Endpoints](#api-endpoints)
-8. [Data Storage](#data-storage)
-9. [Deployment](#deployment)
+7. [Adding Support for New Sensor Types](#adding-support-for-new-sensor-types)
+8. [API Endpoints](#api-endpoints)
+9. [Data Storage](#data-storage)
+10. [Deployment](#deployment)
 
 ## Introduction
 
@@ -44,7 +45,7 @@ To set up and run the IoT Sensor Management System:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-repo/IoTSensorManagement.git
+   git clone https://github.com/mertyagmur/IoTSensorManagement.git
    ```
 
 2. Navigate to the project directory:
@@ -59,17 +60,16 @@ To set up and run the IoT Sensor Management System:
 
 4. Update the configuration files (`appsettings.json`) in both the API and Worker projects with your specific settings.
 
-5. Run the API project:
-   ```
-   cd IoTSensorManagement.Api
-   dotnet run
-   ```
+5. Set Up Multiple Startup Projects:
+   - In **Solution Explorer**, right-click on the solution name and select **Properties**.
+   - In the **Solution Properties** window, navigate to the **Common Properties** section and click on **Startup Project**.
+   - Select the **Multiple startup projects** option.
+   - In the list of projects, set both:
+     - **IoTSensorManagement.Api** to **Start**
+     - **IoTSensorManagement.Workers** to **Start**
 
-6. In a new terminal, run the Worker project:
-   ```
-   cd IoTSensorManagement.Workers
-   dotnet run
-   ```
+6. Run the Projects:
+   - Press **F5** or click the **Start** button in the Visual Studio toolbar. This will launch both the API and Worker projects in separate console windows.
 
 ## Configuration
 
@@ -81,6 +81,34 @@ The system uses JSON configuration files for both the API and Worker services. K
 Make sure to update these files with your specific settings before running the application.
 
 ## Adding New Sensors
+
+New sensors can be added to the system through the `config.json` file located in the `IoTSensorManagement.Shared` namespace.
+
+   - Example:
+     ```json
+     [
+        {
+          "DeviceId": "Light_001",
+          "Type": "Light",
+          "ReadingInterval": "00:15:00",
+          "ReportingInterval": "01:00:10"
+        },
+        {
+          "DeviceId": "Temp_001",
+          "Type": "Temperature",
+          "ReadingInterval": "00:00:02",
+          "ReportingInterval": "00:00:10"
+        },
+        {
+          "DeviceId": "Hum_001",
+          "Type": "Humidity",
+          "ReadingInterval": "00:00:30",
+          "ReportingInterval": "00:01:00"
+        }
+      ]
+     ```
+
+## Adding Support for New Sensor Types
 
 The system is designed to be easily extensible for adding new sensor types. To add a new sensor:
 
@@ -139,14 +167,23 @@ The system is designed to be easily extensible for adding new sensor types. To a
 
 6. **Update the `WorkerFactory`**:
    - Modify the `CreateWorker` method in `IoTSensorManagement.Workers.Factories.WorkerFactory` to include the new worker type.
+  
+7. **Update the `SensorDataDto`**:
+   - Modify the `SensorDataDto` in `IoTSensorManagement.Core.DTOs.SensorDataDto` to include the sensor data type.
 
-7. **Update the `AutoMapperProfile`**:
-   - Add mapping configurations for the new sensor type in `IoTSensorManagement.Core.Mappings.AutoMapperProfile`.
+8. **Update the `AutoMapperProfile`**:
+   - Add mapping configurations and methods for the new sensor type in `IoTSensorManagement.Core.Mappings.AutoMapperProfile`.
 
-8. **Update the `SensorService`**:
-   - Modify the `MapToSensorData` and `GetTypedMaxValue` methods in `IoTSensorManagement.Core.Services.SensorService` to handle the new sensor type.
+9. **Update the `SensorService`**:
+   - Modify the `GetAllDataAsync`, `GetDeviceStatisticsAsync`, `MapToSensorData`, and `GetTypedMaxValue` methods in `IoTSensorManagement.Core.Services.SensorService` to handle the new sensor type.
+  
+10. **Update the `ApiClient`**:
+   - Modify the `ConvertToSensorDataDtos` method in `IoTSensorManagement.Core.Services.ApiClient` to handle the new sensor type.
 
-9. **Update the configuration**:
+11. **Update the repositories**:
+   - Modify the repository implementations to handle the new sensor type.
+
+12. **Update the configuration**:
    - Add a new entry for the new sensor type in the `config.json` file.
 
 After completing these steps, the system will be able to handle the new sensor type, collect its data, and make it available through the API.
