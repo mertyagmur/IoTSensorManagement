@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IoTSensorManagement.Core\IoTSensorManagement.Core.csproj" />
+    <ProjectReference Include="..\IoTSensorManagement.Workers\IoTSensorManagement.Workers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
