@@ -91,39 +91,7 @@ namespace IoTSensorManagement.Core.Services
 			foreach (var r in maxReadings)
 			{
 				var dateString = r.Date.ToString("yyyy-MM-dd");
-				object responseItem;
-
-				switch (device.Type)
-				{
-					case SensorType.Light:
-						responseItem = new
-						{
-							date = dateString,
-							maxIlluminance = r.MaxValue
-						};
-						break;
-					case SensorType.Temperature:
-						responseItem = new
-						{
-							date = dateString,
-							maxTemperature = r.MaxValue 
-						};
-						break;
-					case SensorType.Humidity:
-						responseItem = new
-						{
-							date = dateString,
-							maxHumidity = r.MaxValue
-						};
-						break;
-					default:
-						responseItem = new
-						{
-							date = dateString,
-							maxValue = r.MaxValue 
-						};
-						break;
-				}
+				object responseItem = GetTypedMaxValue(device.Type, r.MaxValue, dateString);
 
 				result.Add(responseItem);
 			}
@@ -143,13 +111,13 @@ namespace IoTSensorManagement.Core.Services
 			throw new ArgumentException("Unable to determine sensor type from data");
 		}
 
-		private object GetTypedMaxValue(SensorType sensorType, double maxValue)
+		private object GetTypedMaxValue(SensorType sensorType, double maxValue, string dateString)
 		{
 			return sensorType switch
 			{
-				SensorType.Light => new { maxIlluminance = maxValue },
-				SensorType.Temperature => new { maxTemperature = maxValue },
-				SensorType.Humidity => new { maxHumidity = maxValue },
+				SensorType.Light => new { date = dateString, maxIlluminance = maxValue,  },
+				SensorType.Temperature => new { date = dateString, maxTemperature = maxValue },
+				SensorType.Humidity => new { date = dateString, maxHumidity = maxValue },
 				_ => throw new ArgumentException($"Unknown sensor type: {sensorType}")
 			};
 		}
