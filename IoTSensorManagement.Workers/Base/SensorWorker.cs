@@ -12,11 +12,11 @@ namespace IoTSensorManagement.Workers.Base
 
 		public SensorWorker(ISensor sensor, IApiClient apiClient, ILogger logger, SensorConfiguration config)
 		{
-			Console.WriteLine($"SensorWorker created for DeviceId: {sensor.DeviceId}");
 			Sensor = sensor;
 			ApiClient = apiClient;
 			Logger = logger;
 			_config = config;
+			Logger.LogInformation($"SensorWorker created for DeviceId: {sensor.DeviceId}");
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -35,7 +35,7 @@ namespace IoTSensorManagement.Workers.Base
 				}
 				catch (Exception ex)
 				{
-					Logger.LogError(ex, $"Error in {Sensor.Type} sensor worker");
+					Logger.LogError(ex, $"Error in {Sensor.DeviceId} sensor worker");
 					await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
 				}
 			}
