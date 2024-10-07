@@ -175,7 +175,7 @@ The system is designed to be easily extensible for adding new sensor types. To a
    - Add mapping configurations and methods for the new sensor type in `IoTSensorManagement.Core.Mappings.AutoMapperProfile`.
 
 9. **Update the `SensorService`**:
-   - Modify the `GetAllDataAsync`, `GetDeviceStatisticsAsync`, `MapToSensorData`, and `GetTypedMaxValue` methods in `IoTSensorManagement.Core.Services.SensorService` to handle the new sensor type.
+   - Modify the `GetAllDataAsync`, `MapToSensorData`, and `GetTypedMaxValue` methods in `IoTSensorManagement.Core.Services.SensorService` to handle the new sensor type.
   
 10. **Update the `ApiClient`**:
    - Modify the `ConvertToSensorDataDtos` method in `IoTSensorManagement.Core.Services.ApiClient` to handle the new sensor type.
