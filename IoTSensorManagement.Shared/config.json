@@ -3,7 +3,7 @@
     "DeviceId": "Light_001",
     "Type": "Light",
     "ReadingInterval": "00:15:00",
-    "ReportingInterval": "01:00:10"
+    "ReportingInterval": "01:00:00"
   },
   {
     "DeviceId": "Temp_001",
