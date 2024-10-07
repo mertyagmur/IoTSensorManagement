@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSensorManagement.Workers
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSensorManagement.Api", "IoTSensorManagement.Api\IoTSensorManagement.Api.csproj", "{6B7E864F-039A-4C77-8FEB-026999F444D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTSensorManagement.Shared", "IoTSensorManagement.Shared\IoTSensorManagement.Shared.csproj", "{5A86F90D-7FA2-475C-82DA-F569D6B051E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSensorManagement.Shared", "IoTSensorManagement.Shared\IoTSensorManagement.Shared.csproj", "{5A86F90D-7FA2-475C-82DA-F569D6B051E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTSensorManagement.Tests", "IoTSensorManagement.Tests\IoTSensorManagement.Tests.csproj", "{EE123ADF-9749-43A1-A50E-7DA65C6DD673}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSensorManagement.Tests", "IoTSensorManagement.Tests\IoTSensorManagement.Tests.csproj", "{EE123ADF-9749-43A1-A50E-7DA65C6DD673}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
