@@ -7,7 +7,7 @@ namespace IoTSensorManagement.Workers.Base
 	{
 		protected readonly ISensor Sensor;
 		protected readonly IApiClient ApiClient;
-		private readonly SensorConfiguration _config;
+		protected readonly SensorConfiguration _config;
 		protected readonly ILogger Logger;
 
 		public SensorWorker(ISensor sensor, IApiClient apiClient, ILogger logger, SensorConfiguration config)
